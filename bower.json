@@ -1,0 +1,25 @@
+{
+  "name": "purescript-complex",
+  "homepage": "https://github.com/matthieubulte/purescript-complex",
+  "description": "Complex numbers in PureScript",
+  "keywords": [
+    "purescript"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matthieubulte/purescript-complex.git"
+  },
+  "ignore": [
+    "**/.*",
+    "bower_components",
+    "node_modules",
+    "output",
+    "bower.json",
+    "package.json"
+  ],
+  "dependencies": {
+    "purescript-math": "~0.2.0",
+    "purescript-prelude": "~0.1.2"
+  }
+}
