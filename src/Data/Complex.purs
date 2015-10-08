@@ -42,7 +42,7 @@ data Polar = Polar Number Number
 -- |     (Polar angle magnitude) -> ...
 -- | ```
 inPolar :: Complex -> Polar
-inPolar (Complex r i) = Polar (atan2 r i) (sqrt (r*r + i*i) )
+inPolar (Complex r i) = Polar (atan2 i r) (sqrt (r*r + i*i) )
 
 -- | Construct a complex number from its polar form. Example: Create the number
 -- | `z = i`
