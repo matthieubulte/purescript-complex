@@ -6,6 +6,8 @@ module Data.Complex
   , outPolar
   , inCartesian
   , outCartesian
+  , conjugate
+  , magnitude
   ) where
 
 import Math (abs, atan2, cos, sin, sqrt)
@@ -42,7 +44,7 @@ data Polar = Polar Number Number
 -- |     (Polar angle magnitude) -> ...
 -- | ```
 inPolar :: Complex -> Polar
-inPolar (Complex r i) = Polar (atan2 i r) (sqrt (r*r + i*i) )
+inPolar z@(Complex r i) = Polar (atan2 i r) (magnitude z)
 
 -- | Construct a complex number from its polar form. Example: Create the number
 -- | `z = i`
@@ -72,6 +74,29 @@ inCartesian (Complex r i) = Cartesian r i
 -- | ```
 outCartesian :: Cartesian -> Complex
 outCartesian (Cartesian r i) = Complex r i
+
+-- | Creates the conjugate of a complex number, with equal real and magnitude but
+-- | with an opposite imaginary part. Example:
+-- |
+-- | ```purescript
+-- | z :: Complex
+-- | z = outCartesian (Cartesian 5 3)
+-- |
+-- | z' :: Complex
+-- | z' = conjugate z
+-- |
+-- | z'' :: Complex
+-- | z'' = outCartesian (Cartesian 5 -3)
+-- |
+-- | z' == z''
+-- | ```
+conjugate :: Complex -> Complex
+conjugate (Complex r i) = Complex r (-i)
+
+-- | Calculates the magnitude of a complex number, which is the distance of the
+-- | number on the complex plan to zero.
+magnitude :: Complex -> Number
+magnitude (Complex r i) = sqrt (r*r + i*i)
 
 -- Instances
 instance arbitraryComplex :: Arbitrary Complex where
