@@ -8,8 +8,12 @@ module Data.Complex
   , outCartesian
   ) where
 
+import Math (abs, atan2, cos, sin, sqrt)
 import Prelude
-import Math (atan2, cos, sin, sqrt)
+import Test.QuickCheck
+import Test.QuickCheck.Arbitrary
+import Test.QuickCheck.Gen (uniform)
+
 
 -- | An abstract complex type.
 data Complex = Complex Number Number
@@ -69,6 +73,11 @@ inCartesian (Complex r i) = Cartesian r i
 outCartesian :: Cartesian -> Complex
 outCartesian (Cartesian r i) = Complex r i
 
+-- Instances
+instance arbitraryComplex :: Arbitrary Complex where
+  arbitrary = outCartesian <$> (Cartesian <$> uniform <*> uniform)
+
+-- Number related instances
 instance semiringComplex :: Semiring Complex where
   add (Complex r i) (Complex r' i') = Complex (r + r') (i + i')
   zero = Complex zero zero
@@ -90,7 +99,10 @@ instance divisionRingComplex :: DivisionRing Complex
 instance numComplex :: Num Complex
 
 instance eqComplex :: Eq Complex where
-  eq (Complex r i) (Complex r' i') = r == r' && i == i'
+  eq (Complex r i) (Complex r' i') = approxEq r r' && approxEq i i'
+    where
+      epsilon      = 0.00000001
+      approxEq a b = abs (a - b) < epsilon
 
 instance showComplex :: Show Complex where
   show (Complex r i) = show r ++ " + " ++ show i ++ "i"
