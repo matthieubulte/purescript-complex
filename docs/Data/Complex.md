@@ -10,6 +10,7 @@ An abstract complex type.
 
 ##### Instances
 ``` purescript
+instance arbitraryComplex :: Arbitrary Complex
 instance semiringComplex :: Semiring Complex
 instance ringComplex :: Ring Complex
 instance moduloSemiringComplex :: ModuloSemiring Complex
@@ -101,5 +102,36 @@ Construct a complex number from its cartesian form. Example: Create the number
 z :: Complex
 z = outCartesian (Cartesian 5 3)
 ```
+
+#### `conjugate`
+
+``` purescript
+conjugate :: Complex -> Complex
+```
+
+Creates the conjugate of a complex number, with equal real and magnitude but
+with an opposite imaginary part. Example:
+
+```purescript
+z :: Complex
+z = outCartesian (Cartesian 5 3)
+
+z' :: Complex
+z' = conjugate z
+
+z'' :: Complex
+z'' = outCartesian (Cartesian 5 -3)
+
+z' == z''
+```
+
+#### `magnitude`
+
+``` purescript
+magnitude :: Complex -> Number
+```
+
+Calculates the magnitude of a complex number, which is the distance of the
+number on the complex plan to zero.
 
 
