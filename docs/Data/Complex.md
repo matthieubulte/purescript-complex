@@ -10,14 +10,11 @@ An abstract complex type.
 
 ##### Instances
 ``` purescript
-instance arbitraryComplex :: Arbitrary Complex
-instance semiringComplex :: Semiring Complex
-instance ringComplex :: Ring Complex
-instance moduloSemiringComplex :: ModuloSemiring Complex
-instance divisionRingComplex :: DivisionRing Complex
-instance numComplex :: Num Complex
-instance eqComplex :: Eq Complex
-instance showComplex :: Show Complex
+Arbitrary Complex
+Semiring Complex
+Ring Complex
+Eq Complex
+Show Complex
 ```
 
 #### `Cartesian`
