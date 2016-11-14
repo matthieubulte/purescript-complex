@@ -17,6 +17,7 @@ import Test.QuickCheck.Arbitrary
 import Test.QuickCheck.Gen (uniform)
 
 
+
 -- | An abstract complex type.
 data Complex = Complex Number Number
 
@@ -112,17 +113,6 @@ instance semiringComplex :: Semiring Complex where
 instance ringComplex :: Ring Complex where
   sub (Complex r i) (Complex r' i') = Complex (r - r') (i - i')
 
-instance moduloSemiringComplex :: ModuloSemiring Complex where
-  div (Complex r i) (Complex r' i') = Complex nr ni
-    where
-      nr = (r*r' + i*i') / d
-      ni = (i*r' - r*i') / d
-      d  = r'*r' + i'*i'
-  mod _ _ = zero
-
-instance divisionRingComplex :: DivisionRing Complex
-instance numComplex :: Num Complex
-
 instance eqComplex :: Eq Complex where
   eq (Complex r i) (Complex r' i') = approxEq r r' && approxEq i i'
     where
@@ -130,4 +120,4 @@ instance eqComplex :: Eq Complex where
       approxEq a b = abs (a - b) < epsilon
 
 instance showComplex :: Show Complex where
-  show (Complex r i) = show r ++ " + " ++ show i ++ "i"
+  show (Complex r i) = show r <> " + " <> show i <> "i"
