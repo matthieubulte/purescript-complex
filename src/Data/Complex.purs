@@ -126,10 +126,7 @@ instance euclideanRingComplex :: EuclideanRing Complex where
 instance fieldComplex :: Field Complex
 
 instance eqComplex :: Eq Complex where
-  eq (Complex r i) (Complex r' i') = approxEq r r' && approxEq i i'
-    where
-      epsilon      = 0.00000001
-      approxEq a b = abs (a - b) < epsilon
+  eq (Complex r i) (Complex r' i') = r == r' && i == i'
 
 instance showComplex :: Show Complex where
   show (Complex r i) = show r <> " + " <> show i <> "i"
