@@ -8,12 +8,15 @@ module Data.Complex
   , outCartesian
   , conjugate
   , magnitude
+  , real
+  , imaginary
+  , argument
+  , modulus
   ) where
 
-import Math (abs, atan2, cos, sin, sqrt)
 import Prelude
-import Test.QuickCheck
-import Test.QuickCheck.Arbitrary
+import Math (atan2, cos, sin, sqrt)
+import Test.QuickCheck.Arbitrary (class Arbitrary)
 import Test.QuickCheck.Gen (uniform)
 
 
@@ -97,6 +100,22 @@ conjugate (Complex r i) = Complex r (-i)
 -- | number on the complex plan to zero.
 magnitude :: Complex -> Number
 magnitude (Complex r i) = sqrt (r*r + i*i)
+
+-- | Gets the real component of a complex number.
+real :: Complex -> Number
+real (Complex r _) = r
+
+-- | Gets the imaginary component of a complex number.
+imaginary :: Complex -> Number
+imaginary (Complex _ i) = i
+
+-- | Gets the length (distance to zero) of a polar number.
+modulus :: Polar -> Number
+modulus (Polar _ m) = m
+
+-- | Gets the argument (angle with respect to the x-axis) of a polar number.
+argument :: Polar -> Number
+argument (Polar a _) = a
 
 -- Instances
 instance arbitraryComplex :: Arbitrary Complex where
